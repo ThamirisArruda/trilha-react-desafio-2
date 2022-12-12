@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import gitLogo from '../assets/github.png'
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -16,13 +15,13 @@ function App() {
 
   const handleSearchRepo = async () => {
 
-    const {data} = await api.get(`repos/${currentRepo}`)
+    const { data } = await api.get(`repos/${currentRepo}`)
 
-    if(data.id){
+    if (data.id) {
 
       const isExist = repos.find(repo => repo.id === data.id);
 
-      if(!isExist){
+      if (!isExist) {
         setRepos(prev => [...prev, data]);
         setCurrentRepo('')
         return
@@ -42,10 +41,10 @@ function App() {
 
   return (
     <Container>
-      <img src={gitLogo} width={72} height={72} alt="github logo"/>
+      <img src={gitLogo} width={72} height={72} alt="github logo" />
       <Input value={currentRepo} onChange={(e) => setCurrentRepo(e.target.value)} />
-      <Button onClick={handleSearchRepo}/>
-      {repos.map(repo => <ItemRepo handleRemoveRepo={handleRemoveRepo} repo={repo}/>)}
+      <Button onClick={handleSearchRepo} />
+      {repos.map(repo => <ItemRepo handleRemoveRepo={handleRemoveRepo} repo={repo} />)}
     </Container>
   );
 }
